@@ -1,7 +1,7 @@
 # 1.1: Implement an algorithm to determine if a string has all unique characters What if you can not use additional data structures?
-# Runtime:
-# Space: 
-# Edge cases: 
+# Runtime: O(n) to check each char in string
+# Space: O(1) for 256 bitarray as an int "tracker"
+# Edge cases: non ascii characters? 
 def is_unique(string):
     """Returns a boolean indicating unique character content
 
@@ -17,12 +17,39 @@ def is_unique(string):
 
     for char in string:
         # check if bits representing char have been flagged as true
+        # bit array is 256 bits wide, representing ord(char) of ASCII chars
+        # (1 << ord(char)) shifts the "true" bit over "ord(char)" times 
         if tracker & (1 << ord(char)):
             return False
-        # flag bits tracking char as true
+        # flag bit tracking char as true
+        # the |= retains original tracker value & adds the new ord(char) flag
         tracker |= (1 << ord(char))
 
     return True
+
+
+# 1.2
+# Runtime: O(n)
+# Space: O(n) for new output string
+# Edge cases:
+def reverse_string(string):
+    """Reverses a C-style string (includes null char)
+
+        >>> reverse_string('abced')
+        'decba'
+
+        >>> reverse_string('Hello, how are you?')
+        '?uoy era woh ,olleH'
+
+    """
+
+    output = ""
+    for i in range(len(string)-1, -1, -1):
+        output += string[i]
+    return output
+
+
+
 
 
 
