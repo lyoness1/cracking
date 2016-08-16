@@ -92,7 +92,7 @@ def are_anagrams(str1, str2):
         False
 
     """
-    # to all lower case, creates O(n+m) extra space for new strings, but allows capital versions to be anagrams of non-capital versions of same str
+    # to all lower case, creates O(n+m) extra space for new strings, but allows a == A
     str1 = str1.lower()
     str2 = str2.lower()
 
@@ -107,8 +107,51 @@ def are_anagrams(str1, str2):
     return tracker1 == tracker2
 
 
+# 1.5
+# Runtime: O(n)
+# Space: O(n) for additional output string
+# Edge cases: 
+def change_spaces(phrase):
+    """Replaces spaces in phrase with '%20'
+
+        >>> change_spaces('Hello, how are you?')
+        'Hello,%20how%20are%20you?'
+
+    """
+
+    output = ""
+    for char in phrase:
+        if char == " ":
+            output += r'%20'
+        else:
+            output += char
+
+    return output
 
 
+# 1.6
+# Runtime:
+# Space:
+# Edge cases: 
+def rotate_90(matrix):
+    """Rotates NxN matrix of 4 byte pixels 90 degrees in place
+
+        >>> rotate_90([[11,12,13,14],[21,22,23,24],[31,32,33,34],[41,42,43,44]])
+        [[41, 31, 21, 11], [42, 32, 22, 12], [43, 33, 23, 13], [44, 34, 24, 14]]
+
+    """
+    # for doctest
+    N = len(matrix)
+
+    output = []
+    # for each col, create a row from a column
+    for col in range(N):
+        new_row = []
+        for row in range(N-1, -1, -1):
+            new_row.append(matrix[row][col])
+        output.append(new_row)
+
+    return output
 
 
 
