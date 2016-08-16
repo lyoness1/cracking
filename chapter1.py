@@ -31,7 +31,7 @@ def is_unique(string):
 # 1.2
 # Runtime: O(n)
 # Space: O(n) for new output string
-# Edge cases:
+# Edge cases: is not in place, as strings are immutable
 def reverse_string(string):
     """Reverses a C-style string (includes null char)
 
@@ -48,6 +48,33 @@ def reverse_string(string):
         output += string[i]
     return output
 
+
+# 1.3
+# Runtime: O(n)
+# Space: O(n) for output string, O(1) for bitarray 255 
+# Edge cases: non ascii chars
+def remove_dupes(string):
+    """Removes duplicate entries in string w/o additional buffer
+
+        >>> remove_dupes('Hello, how are you?')
+        'Helo, hwaryu?'
+        
+        >>> remove_dupes('Allison')
+        'Alison'
+
+    """
+
+    tracker = 0
+    output = ""
+
+    for char in string:
+        if tracker & (1 << ord(char)):
+            continue
+        else:
+            output += char
+        tracker |= (1 << ord(char))
+
+    return output
 
 
 
