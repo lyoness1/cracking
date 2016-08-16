@@ -75,6 +75,40 @@ def remove_dupes(string):
     return output
 
 
+# 1.4
+# Runtime: O(n+m) to check each char
+# Space: O(n+m) to make lower, O(1) if A != a
+# Edge cases: capital vs. lower (anagrams or not?)
+def are_anagrams(str1, str2):
+    """Returns boolean indicating if str1 and str2 are are_anagrams
+
+        >>> are_anagrams('abcde', 'ebcad')
+        True
+
+        >>> are_anagrams("AabBcD", "bbaacd")
+        True
+
+        >>> are_anagrams("abc", "def")
+        False
+
+    """
+    # to all lower case, creates O(n+m) extra space for new strings, but allows capital versions to be anagrams of non-capital versions of same str
+    str1 = str1.lower()
+    str2 = str2.lower()
+
+    tracker1 = 0
+    for char in str1:
+        tracker1 |= (1 << ord(char))
+
+    tracker2 = 0
+    for char in str2:
+        tracker2 |= (1 << ord(char))
+
+    return tracker1 == tracker2
+
+
+
+
 
 
 
