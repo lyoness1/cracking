@@ -143,15 +143,30 @@ def rotate_90(matrix):
     # for doctest
     N = len(matrix)
 
-    output = []
-    # for each col, create a row from a column
-    for col in range(N):
-        new_row = []
-        for row in range(N-1, -1, -1):
-            new_row.append(matrix[row][col])
-        output.append(new_row)
+    # there are N/2 layers (outside --> inside) to rotate
+    for layer in range(N/2):
+        # for each layer, make four shifts, using a tmp var for in place shift
+        first = layer
+        last = N - 1 - layer
+        for i in range(first, last):
+            offset = i - first
+            tmp = matrix[first][i]
+            # left --> top
+            matrix[first][i] = matrix[last-offset][first]
+            # bottom --> left
+            matrix[last-offset][first] = matrix[last][last-offset]
+            # right --> bottom
+            matrix[last][last-offset] = matrix[i][last]
+            # top --> right
+            matrix[i][last] = tmp
 
-    return output
+    return matrix
+
+
+
+
+
+
 
 
 
