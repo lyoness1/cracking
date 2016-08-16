@@ -58,7 +58,7 @@ def remove_dupes(string):
 
         >>> remove_dupes('Hello, how are you?')
         'Helo, hwaryu?'
-        
+
         >>> remove_dupes('Allison')
         'Alison'
 
@@ -68,9 +68,7 @@ def remove_dupes(string):
     output = ""
 
     for char in string:
-        if tracker & (1 << ord(char)):
-            continue
-        else:
+        if not (tracker & (1 << ord(char))):
             output += char
         tracker |= (1 << ord(char))
 
