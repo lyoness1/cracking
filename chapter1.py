@@ -130,8 +130,8 @@ def change_spaces(phrase):
 
 
 # 1.6
-# Runtime:
-# Space:
+# Runtime: O(n^2) to hit each element of matrix
+# Space: O(1) when done in place
 # Edge cases: 
 def rotate_90(matrix):
     """Rotates NxN matrix of 4 byte pixels 90 degrees in place
@@ -163,7 +163,37 @@ def rotate_90(matrix):
     return matrix
 
 
+# 1.7
+# Runtime: O(nm) to iterate over every cell
+# Space: O(n) worst case to store all rows/cols that need to zero out
+# Edge cases: 
+def set_zeros(matrix):
+    """Nullifies rows and cols of any zero entry in matrix
 
+    >>> set_zeros([[1, 2, 3], [4, 0, 6], [7, 8, 9]])
+    [[1, 0, 3], [0, 0, 0], [7, 0, 9]]
+
+    """
+
+    N = len(matrix)
+    zero_rows = []
+    zero_cols = []
+
+    for row in xrange(N):
+        for col in xrange(N):
+            if matrix[row][col] == 0:
+                zero_rows.append(row)
+                zero_cols.append(col)
+
+    for row in zero_rows:
+        for i in range(N):
+            matrix[row][i] = 0
+
+    for col in zero_cols:
+        for j in range(N):
+            matrix[j][col] = 0
+
+    return matrix
 
 
 
