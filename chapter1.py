@@ -196,6 +196,52 @@ def set_zeros(matrix):
     return matrix
 
 
+# 1.8
+# Runtime:
+# Space:
+# Edge cases: already shifted
+def is_substring(sub, string):
+    """Returns boolean if sub is substring of string
+
+        >>> is_substring("was", "I was here")
+        True
+
+        >>> is_substring("son", "Allison")
+        True
+
+        >>> is_substring("abc", "def")
+        False
+
+    """
+
+    return sub in string
+
+def is_rotation(s1, s2):
+    """Checks if s1 is a rotation of s2
+
+        >>> is_rotation("erbottlewat", "waterbottle")
+        True
+
+        >>> is_rotation("erb", "waterbottle")
+        False
+
+        >>> is_rotation("waterbottle", "waterbottle")
+        True
+
+    """
+
+    if len(s1) != len(s2):
+        return False
+
+    return is_substring(s2, s1 + s1)
+
+
+
+
+
+
+
+
 
 
 
