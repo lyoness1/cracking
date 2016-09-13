@@ -1,4 +1,5 @@
-# 1.1: Implement an algorithm to determine if a string has all unique characters What if you can not use additional data structures?
+# 1.1: Implement an algorithm to determine if a string has all unique characters
+# What if you can not use additional data structures?
 # Runtime: O(n) to check each char in string
 # Space: O(1) for 256 bitarray as an int "tracker"
 # Edge cases: non ascii characters? 
@@ -92,7 +93,8 @@ def are_anagrams(str1, str2):
         False
 
     """
-    # to all lower case, creates O(n+m) extra space for new strings, but allows a == A
+    # to all lower case, creates O(n+m) extra space for new strings, 
+    # but allows a == A
     str1 = str1.lower()
     str2 = str2.lower()
 
