@@ -222,8 +222,58 @@ def add_two_nums(LL1, LL2):
     print output
 
 
-# 2.5
+# 2.5 Find the begining of a cyle in a SLL
+# Runtime: O(n)
+# Space: O(1)
+def find_cycle(LL):
+    """
 
+        >>> a = LinkedListNode('A')
+        >>> b = LinkedListNode('B')
+        >>> c = LinkedListNode('C')
+        >>> d = LinkedListNode('D')
+        >>> a.next = b
+        >>> b.next = c
+        >>> c.next = d
+        >>> d.next = b
+        >>> lst = LinkedList(a)
+        >>> find_cycle(lst)
+        'B'
+
+    """
+
+    if not LL.head:
+        raise Exception("List is empty")
+
+    # Step 1: Send two runners until overlap to ensure in cycle
+    runner1 = LL.head.next
+    runner2 = LL.head
+
+    while runner1 and (runner1.value != runner2.value):
+        runner1 = runner1.next.next
+        runner2 = runner2.next
+
+    # Step 2: Find length of cycle
+    steps = 1
+    runner1 = runner1.next
+    while runner1.value != runner2.value:
+        runner1 = runner1.next
+        steps += 1
+
+    # Step 3: Send runner 1 forward length of cycle
+    runner1 = LL.head
+    pos = 0
+    while pos < steps:
+        runner1 = runner1.next
+        pos += 1
+
+    # Step 4: Runner2 follows until meeting runner1, they meet at cycle begining
+    runner2 = LL.head
+    while runner1.value != runner2.value:
+        runner1 = runner1.next
+        runner2 = runner2.next
+
+    return runner1.value
 
 
 
