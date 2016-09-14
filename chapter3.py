@@ -100,7 +100,59 @@ class SetOfStacks:
             return None
         return self.stacks[stack_index].pop()
 
-# 3.4 
+# 3.4 Towers of Hanoi
+# A) Only one disk can be moved at a time
+# B) disks can only be placed on larger disks or empty rods
+class Hanoi:
+    def __init__(self, size):
+        self.size = size
+        self.towers = [[x for x in xrange(size, 0, -1)],[],[]]
+
+    def moveDisk(self, fr, to):
+        disk = self.towers[fr-1].pop()
+        self.towers[to-1].append(disk)
+    
+    def play(self, n, start, temp, end):
+        if n == 1:
+            self.moveDisk(start, end)
+        else: 
+            self.play(n-1, start, end, temp)
+            self.play(1, start, temp, end)
+            self.play(n-1, temp, end, start)
+
+
+# 3.5 myQueue is a queue with two stacks
+class MyQueue:
+    def __init__(self):
+        self.first = []
+        self.second = []
+
+    def nq(self, value):
+        self.first.append(value)
+
+    def dq(self):
+        if len(self.first) == 0:
+            return self.second.pop()
+        else: 
+            while self.first:
+                self.second.append(self.first.pop())
+            self.dq()
+
+    def peek(self):
+        if len(self.first) == 1:
+            return self.first[-1]
+        else: 
+            while self.first:
+                self.second.append(self.fisrt.pop())
+            self.peek()
+
+    def get_size(self):
+        return len(self.first) + len(first.second)
+
+
+# 3.6
+
+
 
 
 
