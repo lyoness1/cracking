@@ -13,7 +13,6 @@
 
 """
 
-# Generic Tree Structure
 class Node(object):
     def __init__(self, value=None, children=None):
         self.value = value
@@ -43,13 +42,58 @@ class Node(object):
 
 
 # 4.2 Given a directed graph, design an algorithm to find out whether there is a
-# route be- tween two nodes. 
+# route between two nodes. 
 """
-    >>> 
+    >>> n1 = DirectedGraph(1)
+    >>> n2 = DirectedGraph(2)
+    >>> n3 = DirectedGraph(3)
+    >>> n4 = DirectedGraph(4)
+    >>> n5 = DirectedGraph(5)
+    >>> n6 = DirectedGraph(6)
+
+    >>> n1.adjacent.append(n2)
+    >>> n2.adjacent.append(n3)
+    >>> n2.adjacent.append(n4)
+    >>> n4.adjacent.append(n5)
+    >>> n4.adjacent.append(n1)
+
+    >>> n1.is_route(n5)
+    True
+    >>> n5.is_route(n1)
+    False
+    >>> n1.is_route(n6)
+    False
 
 """
-class DirectedGraphNode(object):
-    def __init__(self)
+
+class GraphNode(object):
+    def __init__(self, value=None, adjacent=None):
+        self.value = value
+        self.adjacent = [] or adjacent
+
+    def is_route(self, other):
+        visited = set(self)
+        while visited: 
+            curr = visited.pop()
+            if curr == other:
+                return True
+            if self.adjacent:
+                    visited.add(self.adjacent - visited)
+        return False
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
