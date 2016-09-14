@@ -39,7 +39,7 @@ class SingleArrayStacks:
         return self.pointer[stacknum] == -1
 
 
-
+# Generic Stack class
 class Stack:
     def __init__(self):
         self.stack = []
@@ -55,3 +55,34 @@ class Stack:
 
     def isEmpty(self):
         return self.stack == []
+
+
+# 3.2 Write a method get_min() that returns min value in stsack in O(1)
+class MinStack:
+    def __init__(self):
+        self.minStack = Stack()
+        self.stack = Stack()
+
+    def push(self, value):
+        self.stack.push(value)
+        if value <= self.minStack.peek():
+            self.minStack.push(value)
+
+    def pop(self):
+        data = self.stack.pop()
+        if data <= self.minStack.peek():
+            self.minStack.pop()
+        return data
+
+# 3.3 g
+
+
+
+
+
+
+
+
+
+
+
