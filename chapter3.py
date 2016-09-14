@@ -74,7 +74,33 @@ class MinStack:
             self.minStack.pop()
         return data
 
-# 3.3 g
+
+# 3.3 Set of Stacks that will prevent toppling if stack gets too big
+class SetOfStacks:
+    def __init__(self, capacity):
+        self.stacks = []
+        self.capacity = capacity
+
+    def push(self, value):
+        if len(self.stacks) == 0 or len(self.stacks[-1]) == self.capacity:
+            self.stacks.append([])
+        self.stacks[-1].append(value)
+
+    def pop(self):
+        if not self.stacks:
+            raise Exception("Stack is empty")
+        if not self.stacks[-1]:
+            self.stacks.remove([])
+        return self.stacks[-1].pop()
+
+    def popAt(self, stack_index):
+        if not self.stacks:
+            raise Exception("Stack is empty")
+        if not self.stacks[stack_index]:
+            return None
+        return self.stacks[stack_index].pop()
+
+# 3.4 
 
 
 
