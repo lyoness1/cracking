@@ -150,7 +150,47 @@ class MyQueue:
         return len(self.first) + len(first.second)
 
 
-# 3.6
+# 3.6 write a method to sort a stack in ascending order
+# Make no assumptions about how the stack is implemented
+# Use push(), peek(), pop(), and is_empty() only
+class MyStack:
+    def __init__(self):
+        self.stack = []
+
+    def peek(self):
+        if not self.stack:
+            return None
+        return self.stack[-1]
+
+    def push(self, value):
+        self.stack.append(value)
+
+    def pop(self):
+        return self.stack.pop()
+
+    def is_empty(self):
+        return len(self.stack) == 0
+
+    def sort_in_ascending_order(self):
+        old = self
+        # make a new stack
+        new = MyStack()
+        # while the old stack still has things in it...
+        while not old.is_empty():
+            # grab the top thing from the old stack
+            tmp = old.pop()
+            # if the new stack isn't empty and its top value is bigger than temp
+            # take things off the new stack and put them back on the old one
+            while not new.is_empty() and new.peek() > tmp:
+                old.push(new.pop())
+            # put the temp on the new stack
+            new.push(tmp)
+            # if the old stack isn't empty and it's top value is bigger than new
+            # take things off the old stack and put them on the new one
+            while not old.is_empty() and old.peek() >= new.peek():
+                old.push(new.pop())
+        # return the sorted stack
+        return new
 
 
 
