@@ -197,8 +197,8 @@ def set_zeros(matrix):
 
 
 # 1.8
-# Runtime:
-# Space:
+# Runtime: O(1)
+# Space: O(n) for adding s1
 # Edge cases: already shifted
 def is_substring(sub, string):
     """Returns boolean if sub is substring of string
