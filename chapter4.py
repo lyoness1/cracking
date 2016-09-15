@@ -190,23 +190,28 @@ class BSTNode:
             15-->25-->35-->45-->55-->65-->75-->85-->None
 
         """
+        # 'global' variable to store lists by depth
         self.levels = {}
 
         def recurser(self, levels, depth=0):
+            # add/update list at appropriate level
             if depth not in levels:
                 levels[depth] = LL(LLNode(self))
             else:
                 curr_ll = levels[depth]
                 curr_ll.add_node(LLNode(self))
-
+            # recurse downward
             if self.left:
                 recurser(self.left, levels, depth+1)
             if self.right:
                 recurser(self.right, levels, depth+1)
+            # if leaf, return up callstack
             return 
 
+        # start recurser with root
         recurser(self, self.levels)
 
+        # print lists
         for lst in self.levels.values():
             print lst.head
 
