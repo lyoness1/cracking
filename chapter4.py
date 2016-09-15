@@ -340,6 +340,57 @@ def is_same_tree(t1, t2):
     return (is_same_tree(t1.left, t2.left) and is_same_tree(t1.right, t2.right))
 
 
+# 4.8 collect sums in tree
+def get_all_paths(root, value):
+    # base case: 
+    if not root:
+        return []
+
+    # initialize place to store all possible paths
+    all_paths = []
+
+    # find all paths with current root, append to path list
+    paths = get_paths(root)
+    if paths:
+        all_paths.extend(paths)
+
+    # recurse left and right for all sub trees
+    all_paths.extend(get_all_paths(root.left, value))
+    all_paths.extend(get_all_paths(root.right, value))
+    return all_paths
+
+
+def get_paths(root, value):
+    # base case: empty tree/leaf
+    if not root:
+        return []
+
+    # update target
+    remainder = value - root.value
+
+    # base case: hit target value
+    if remainder == 0:
+        return [[root.value]]
+
+    # initialize place to store paths
+    paths = []
+
+    # recurse left and right with updated value
+    left_paths = get_paths(root.left, remainder)
+    if left_paths:
+        for path in left_paths:
+            new_path = [root.value]
+            new_path.extend(path)
+            paths.append(new_path)
+
+    right_paths = get_paths(root.right, remainder)
+    if right_paths:
+        for path in right_paths:
+            new_path = [root.value]
+            new_path.extend(path)
+            paths.append(new_path)
+
+    return paths
 
 
 
