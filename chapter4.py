@@ -216,7 +216,62 @@ class BSTNode:
             print lst.head
 
 
-# 4.5
+# 4.5 Find 'next' node (in order) of a given node in BST w/ link to parent
+class BSTNd:
+    def __init__(self, value, parent=None, left=None, right=None):
+        self.value = value
+        self.parent = parent
+        self.left = left
+        self.right = right
+
+    def __repr__(self):
+        return "<Node %s>" % self.value
+
+    def __str__(self, depth=0):
+        ret = ""
+        if self.right != None:
+            ret += self.right.__str__(depth + 1)
+        ret += "\n" + ("    "*depth) + str(self.value)
+        if self.left != None:
+            ret += self.left.__str__(depth + 1)
+        return ret
+
+    def find_next(self):
+        """
+            >>> fifty = BSTNd(50)
+            >>> thirty = BSTNd(30, fifty)
+            >>> seventy = BSTNd(70, fifty)
+            >>> twenty = BSTNd(20, thirty)
+            >>> forty = BSTNd(40, thirty)
+            >>> sixty = BSTNd(60, seventy)
+            >>> eighty = BSTNd(80, seventy)
+            >>> fifty.left = thirty
+            >>> fifty.right = seventy
+            >>> thirty.left = twenty
+            >>> thirty.right = forty
+            >>> seventy.left = sixty
+            >>> seventy.right = eighty
+            >>> thirty.find_next()
+            40
+            >>> twenty.find_next()
+            30
+            >>> fifty.find_next()
+            60
+
+        """
+        def find_left_most_child(self):
+            if not self.left:
+                return self.value
+            return find_left_most_child(self.left)
+
+        # if no right children, return parent
+        if not self.right:
+            return self.parent.value
+        # find left most child of self's right branch
+        return find_left_most_child(self.right)
+
+        # NOTE: doesn't account for starting w/ largest value in tree
+
 
 
 
