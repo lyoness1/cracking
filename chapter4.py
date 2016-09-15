@@ -313,8 +313,31 @@ def find_first_comm_anscestor(root, a_value, b_value):
 
 
 
+# 4.7 T1 is a BST with millions of nodes, T2 a BST with hundreds. 
+# Write an alg to determine if T2 is a subtree of T1
+def is_subtree(t1, t2):
+    # base case: nothing left in t2; empty tree is always a subtree
+    if t1 and not t2:
+        return True
+    # base case: found root of t2 in t1, check that all of t2 exists
+    elif t1.value == t2.value:
+        return is_same_tree(t1, t2)
+    # recurse: determine if t2 is in either branch of t1
+    return is_subtree(t1.left, t2) or is_subtree(t1.right, t2)
 
 
+def is_same_tree(t1, t2):
+    # base case: nothing left in tree
+    if not t1 and not t2:
+        return True
+    # base case: trees aren't the same size (one runs out, the other doesn't)
+    elif (t1 and not t2) or (t2 and not t1):
+        return False
+    # base case: data doesn't match
+    if t1.value != t2.value:
+        return False
+    # recurse: make sure both branches are still same tree
+    return (is_same_tree(t1.left, t2.left) and is_same_tree(t1.right, t2.right))
 
 
 
