@@ -273,6 +273,45 @@ class BSTNd:
         # NOTE: doesn't account for starting w/ largest value in tree
 
 
+# 4.6 Write a fn to find first common anscestor of two nodes in binary tree
+def contain(root, node):
+    if not root or not node:
+        return False
+    if root.value == node:
+        return True
+    return contain(root.left, node) or contain(root.right, node)
+
+def find_first_comm_anscestor(root, a_value, b_value):
+    """
+        >>> bst = BSTNode(50, BSTNode(30, BSTNode(20, BSTNode(15), BSTNode(25)), BSTNode(40, BSTNode(35), BSTNode(45))), BSTNode(70, BSTNode(60, BSTNode(55), BSTNode(65)), BSTNode(80, BSTNode(75), BSTNode(85))))
+        >>> find_first_comm_anscestor(bst, 35, 45)
+        40
+        >>> find_first_comm_anscestor(bst, 55, 85)
+        70
+        >>> find_first_comm_anscestor(bst, 45, 40)
+        40
+    """
+
+    # base case: either a or b are not in the tree
+    if not (contain(root, a_value) or contain(root, b_value)):
+        return None
+    # base cases for returning root:
+    elif (# root is a, check below for b
+           (root.value == a_value and (contain(root.left, b_value) or contain(root.right, b_value))) or
+           # root is b, check below for a
+           (root.value == b_value and (contain(root.left, a_value) or contain(root.right, a_value))) or
+           # a and b are in opposite branches
+           (contain(root.right, a_value) and contain(root.left, b_value)) or
+           (contain(root.right, b_value) and contain(root.left, a_value))
+        ):
+        return root.value
+    # progress: both a and b are left
+    elif contain(root.left, a_value) and contain(root.left, b_value):
+        return find_first_comm_anscestor(root.left, a_value, b_value)
+    # progress: both a and b are right
+    return find_first_comm_anscestor(root.right, a_value, b_value)
+
+
 
 
 
